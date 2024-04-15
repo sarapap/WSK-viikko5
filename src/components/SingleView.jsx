@@ -13,7 +13,19 @@ const SingleView = props => {
                     <button onClick={handleClick}>Close</button>
                 </p>
                 {selectedItem && (
-                    <img src={selectedItem.filename} alt={selectedItem.title} />
+                    <>
+                        {selectedItem.media_type.includes('video') ?
+                            <video controls>
+                                <source src={selectedItem.filename}
+                                    type={selectedItem.media_type} />
+                            </video> : (
+                                <img src={selectedItem.filename} alt={selectedItem.title} />
+                            )}
+                        <h2>{selectedItem.title}</h2>
+                        <p>{selectedItem.description}</p>
+                        <p>Created: {new Date(selectedItem.created_at).toLocaleString('fi-FI')}</p>
+                        <p>Size: {selectedItem.filesize}</p>
+                    </>
                 )}
             </dialog>
         </>
