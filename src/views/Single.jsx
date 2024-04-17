@@ -1,18 +1,27 @@
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import SingleView from '../components/SingleView';
+import mediaArray from "../data/media";
 
 const Single = () => {
     const location = useLocation();
     const navigate = useNavigate();
+    const params = useParams();
 
-    if (!location.state?.item) {
-        return null;
+    const id = Number(params.id);
+
+    let item;
+    if (location.state?.item) {
+        item = mediaArray.find(({ media_id }) => Number(media_id) === id);
+    } else {
+        item = location.state.item;
     }
 
-    const item = location.state;
+    if (!item) {
+        return <>Media not found</>
+    }
 
     return <SingleView
-        setSelectedItem={item}
+        selectedItem={item}
         setSelectedItem={() => navigate(-1)}
     />
 

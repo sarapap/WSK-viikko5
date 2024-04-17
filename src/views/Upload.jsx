@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { useState } from "react";
 
 const Upload = () => {
 
@@ -8,6 +9,7 @@ const Upload = () => {
     const handleSubmit = (event) => {
         event.preventDefault();
         console.log('Tiedostoa lähetetään');
+
         console.log("file", file);
         console.log("name", name);
     };
@@ -29,15 +31,12 @@ const Upload = () => {
                     onChange={(event) =>
                         setName(event.target.value)}
                 />
-                <button className='m-3 mt-0 
-                p-3 
-                rounded-lg 
-                bg-blue-400 text-stone-100'
+                <button className='m-3 mt-0 p-3 rounded-lg text-stone-100'
                     type="submit">
                     Upload file</button>
             </form>
 
-            <p className="mt-4">
+            <p>
                 <Link to='/'>Back to Home</Link>
             </p>
         </>
