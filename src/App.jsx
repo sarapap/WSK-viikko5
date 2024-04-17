@@ -10,8 +10,9 @@ const App = () => {
       <h1>My App</h1>
 
       <nav>
-        <Link to='/profile'>Profiili 🤣</Link>
         <Link to='/'>Etusivu 🏠</Link>
+        <Link to='/profile'>Profiili 🤣</Link>
+        <Link to='/upload'>Upload 📤</Link>
       </nav>
       <Routes>
         <Route path='/' element={<Home />} />
