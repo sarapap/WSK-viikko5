@@ -1,26 +1,33 @@
-import React from 'react'
 import PropTypes from 'prop-types'
+import Button from './UI/Button';
 
 const SingleView = props => {
     const { selectedItem, setSelectedItem } = props;
     const handleClick = () => {
         setSelectedItem(null);
-    }
+    };
     return (
         <>
-            <dialog open={selectedItem ? true : false}>
+            <dialog
+                className='fixed top-0 h-dvh w-dvw bg-black bg-opacity-50 p-4 text-stone-100'
+                open={selectedItem ? true : false}>
                 <p>
-                    <button onClick={handleClick}>Close</button>
+                    <Button text='Close' handleClick={handleClick} />
                 </p>
                 {selectedItem && (
                     <>
-                        {selectedItem.media_type.includes('video') ?
-                            <video controls>
-                                <source src={selectedItem.filename}
+                        {selectedItem.media_type.includes('video') ? (
+                            <video className='h-3/4 m-auto content-center' controls>
+                                <source
+                                    src={selectedItem.filename}
                                     type={selectedItem.media_type} />
-                            </video> : (
-                                <img src={selectedItem.filename} alt={selectedItem.title} />
-                            )}
+                            </video>
+                        ) : (
+                            <img
+                                className='h-3/4 m-auto'
+                                src={selectedItem.filename}
+                                alt={selectedItem.title} />
+                        )}
                         <h2>{selectedItem.title}</h2>
                         <p>{selectedItem.description}</p>
                         <p>Created: {new Date(selectedItem.created_at).toLocaleString('fi-FI')}</p>
@@ -33,7 +40,7 @@ const SingleView = props => {
 };
 
 SingleView.propTypes = {
-    selectedItem: PropTypes.object.isRequired,
+    selectedItem: PropTypes.object,
     setSelectedItem: PropTypes.func.isRequired,
 }
 
