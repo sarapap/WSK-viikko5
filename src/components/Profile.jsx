@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-export const Profile = () => {
+const Profile = () => {
     return (
         <div>
             <h2 className="text-xl">Tämä on minun profiilisivu</h2>
@@ -11,3 +11,5 @@ export const Profile = () => {
         </div>
     );
 }
+
+export default Profile;
