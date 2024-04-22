@@ -36,7 +36,36 @@ const useUser = () => {
         const userResult = await fetchData(import.meta.env.VITE_AUTH_API + '/users/' + id);
         return userResult;
     };
-    return { getUserById };
+
+    const getUserByToken = async (token) => {
+        const options = {
+            headers: {
+                Authorization: 'Bearer ' + token,
+            },
+        };
+        const tokenResult = await fetchData(import.meta.env.VITE_AUTH_API + '/users/token',
+            options
+        );
+        return tokenResult;
+    };
+
+    const register = async (inputs) => {
+        const options = {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(inputs),
+        };
+
+        const registerResult = await fetchData(import.meta.env.VITE_AUTH_API + '/users/',
+            options
+        );
+
+        return registerResult;
+    };
+
+    return { getUserById, getUserByToken, register };
 };
 
 const useAuthentication = () => {

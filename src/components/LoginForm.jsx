@@ -1,8 +1,11 @@
 import { useAuthentication } from "../hooks/APIHooks";
 import useForm from "../hooks/formHooks";
+import { useNavigate } from "react-router-dom";
+import Button from "./UI/Button";
 
 const LoginForm = () => {
     const { login } = useAuthentication();
+    const navigate = useNavigate();
     const initValues = {
         username: "",
         password: "",
@@ -13,6 +16,8 @@ const LoginForm = () => {
         try {
             const userData = await login(inputs);
             console.log("doLogin", userData);
+            localStorage.setItem("token", userData.token);
+            navigate('/');
         } catch (error) {
             alert(error.message);
         }
@@ -49,7 +54,7 @@ const LoginForm = () => {
                         autoComplete="current-password"
                     />
                 </div>
-                <button type="submit">Login</button>
+                <Button type="submit">Login</Button>
             </form>
         </>
     );
