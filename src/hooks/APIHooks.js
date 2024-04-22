@@ -39,5 +39,24 @@ const useUser = () => {
     return { getUserById };
 };
 
+const useAuthentication = () => {
+    const login = async (inputs) => {
+        const options = {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(inputs),
+        };
 
-export { useMedia, useUser };
+        const loginResult = await fetchData(import.meta.env.VITE_AUTH_API + '/auth/login',
+            options
+        );
+
+        return loginResult;
+    };
+
+    return { login };
+};
+
+export { useMedia, useUser, useAuthentication };
