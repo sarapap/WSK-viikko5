@@ -13,14 +13,15 @@ const Home = () => {
         try {
             const mediaResult = await fetchData(import.meta.env.VITE_MEDIA_API + '/media',
             );
-            mediaResult.map(async (mediaItem) => {
+
+            const mediaWithUser = await Promise.all(mediaResult.map(async (mediaItem) => {
                 const userResult = await fetchData(import.meta.env.VITE_AUTH_API + '/users' + mediaItem.user_id);
-                console.log(userResult);
-            });
+                return { ...mediaItem, username: userResult.username };
+            }));
 
-            console.log(newArray);
+            console.log(mediaWithUser);
 
-            setMediaArray(mediaResult);
+            setMediaArray(mediaWithUser);
         }
         catch (error) {
             console.error(error);
