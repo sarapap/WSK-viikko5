@@ -1,26 +1,25 @@
-import { useState, useEffect } from 'react';
-import fetchData from '../lib/fetchData';
+import { useEffect, useState } from 'react';
+import { fetchData } from '../lib/fetchData';
 
 const useMedia = () => {
     const [mediaArray, setMediaArray] = useState([]);
     const { getUserById } = useUser();
-
     const getMedia = async () => {
         try {
-            const mediaResult = await fetchData(import.meta.env.VITE_MEDIA_API + '/media',
+            const mediaResult = await fetchData(
+                import.meta.env.VITE_MEDIA_API + '/media',
             );
 
-            const mediaWithUser = await Promise.all(mediaResult.map(async (mediaItem) => {
-                const userResult = await getUserById(mediaItem.user_id);
-                return { ...mediaItem, username: userResult.username };
-            }));
-
-            console.log(mediaWithUser);
+            const mediaWithUser = await Promise.all(
+                mediaResult.map(async (mediaItem) => {
+                    const userResult = await getUserById(mediaItem.user_id);
+                    return { ...mediaItem, username: userResult.username };
+                }),
+            );
 
             setMediaArray(mediaWithUser);
-        }
-        catch (error) {
-            console.error(error);
+        } catch (error) {
+            console.log(error);
         }
     };
 
@@ -33,7 +32,9 @@ const useMedia = () => {
 
 const useUser = () => {
     const getUserById = async (id) => {
-        const userResult = await fetchData(import.meta.env.VITE_AUTH_API + '/users/' + id);
+        const userResult = await fetchData(
+            import.meta.env.VITE_AUTH_API + '/users/' + id,
+        );
         return userResult;
     };
 
@@ -43,8 +44,9 @@ const useUser = () => {
                 Authorization: 'Bearer ' + token,
             },
         };
-        const tokenResult = await fetchData(import.meta.env.VITE_AUTH_API + '/users/token',
-            options
+        const tokenResult = await fetchData(
+            import.meta.env.VITE_AUTH_API + '/users/token',
+            options,
         );
         return tokenResult;
     };
@@ -58,11 +60,7 @@ const useUser = () => {
             body: JSON.stringify(inputs),
         };
 
-        const registerResult = await fetchData(import.meta.env.VITE_AUTH_API + '/users/',
-            options
-        );
-
-        return registerResult;
+        return await fetchData(import.meta.env.VITE_AUTH_API + '/users', options);
     };
 
     return { getUserById, getUserByToken, register };
@@ -78,10 +76,10 @@ const useAuthentication = () => {
             body: JSON.stringify(inputs),
         };
 
-        const loginResult = await fetchData(import.meta.env.VITE_AUTH_API + '/auth/login',
-            options
+        const loginResult = await fetchData(
+            import.meta.env.VITE_AUTH_API + '/auth/login',
+            options,
         );
-
         return loginResult;
     };
 
