@@ -9,4 +9,4 @@ Currently, two official plugins are available:
 
 # Linkki
 
-Open [Linkki tehtävään](https://users.metropolia.fi/~sarapap/routing/)
+Open [Linkki tehtävään](https://users.metropolia.fi/~sarapap/custom-hooks/)
