@@ -23,8 +23,10 @@ const App = () => {
                 <Profile />
               </ProtectedRoute>
             } />
-            <Route path="/profile" element={<Profile />} />
-            <Route path="/upload" element={<Upload />} />
+            <Route path="/upload" element={
+              <ProtectedRoute>
+                <Upload />
+              </ProtectedRoute>} />
             <Route path="/media/:id" element={<Single />} />
             <Route path="/login" element={<Login />} />
           </Route>
