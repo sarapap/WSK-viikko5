@@ -30,7 +30,7 @@ const useMedia = () => {
 
     const postMedia = async (file, inputs, token) => {
         const result = await fetchData(
-            import.meta.env.VITE_MEDIA_API + '/media',
+            import.meta.env.VITE_UPLOAD_SERVER + '/media',
             {
                 method: 'POST',
                 body: JSON.stringify({ ...file, ...inputs }),
@@ -99,7 +99,6 @@ const useAuthentication = () => {
         );
         return loginResult;
     };
-
     return { login };
 };
 

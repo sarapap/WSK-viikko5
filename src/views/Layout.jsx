@@ -1,10 +1,10 @@
 import { Outlet } from "react-router-dom";
-import SiteNavigation from "../components/SiteNavigation";
+import Logout from "../views/Logout";
 
 const Layout = () => (
     <div>
         <header>
-            <SiteNavigation />
+            <Logout />
         </header>
         <main>
             <Outlet />
