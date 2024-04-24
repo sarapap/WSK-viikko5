@@ -2,9 +2,10 @@ import { Link } from "react-router-dom";
 import { useUser } from "../hooks/APIHooks";
 import { useEffect } from "react";
 import { useUserContext } from "../contexts/UserContext";
+import UserData from "../components/UserData";
 
 export const Profile = () => {
-    const { user, setUser } = useUserContext(null);
+    const { setUser } = useUserContext();
     const { getUserByToken } = useUser();
 
     useEffect(() => {
@@ -23,18 +24,11 @@ export const Profile = () => {
     return (
         <div>
             <h2 className="text-2xl font-bold">Tämä on minun profiilisivu</h2>
-
             <p>
                 <Link to='/'>Takaisin etusivulle</Link>
             </p>
             <div>
-                {user && (
-                    <>
-                        <p>Käyttäjätunnus: {user.username}</p>
-                        <p>Email: {user.email}</p>
-                        <p>Luotu: {new Date(user.created_at).toLocaleString('fi-FI')}</p>
-                    </>
-                )}
+                <UserData />
             </div>
         </div>
     );

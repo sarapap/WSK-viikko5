@@ -10,8 +10,8 @@ import { UserProvider } from './contexts/UserContext';
 
 const App = () => {
   return (
-    <UserProvider>
-      <Router>
+    <Router>
+      <UserProvider>
         <Routes>
           <Route path="/" element={<Layout />}>
             <Route index element={<Home />} />
@@ -21,8 +21,8 @@ const App = () => {
             <Route path="/login" element={<Login />} />
           </Route>
         </Routes>
-      </Router>
-    </UserProvider>
+      </UserProvider>
+    </Router>
   );
 };
 
