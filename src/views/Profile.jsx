@@ -1,9 +1,10 @@
 import { Link } from "react-router-dom";
 import { useUser } from "../hooks/APIHooks";
-import { useState } from "react";
+import { useEffect } from "react";
+import { useUserContext } from "../contexts/UserContext";
 
 export const Profile = () => {
-    const [user, setUser] = useState(null);
+    const { user, setUser } = useUserContext(null);
     const { getUserByToken } = useUser();
 
     useEffect(() => {
