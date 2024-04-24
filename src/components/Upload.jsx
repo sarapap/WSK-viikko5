@@ -9,23 +9,6 @@ const Upload = () => {
     const token = localStorage.getItem('token');
     const { postMedia } = useMedia();
 
-
-    const handleInputChange = (event) => {
-        console.log('handleInputChange', event.target.value);
-
-        setInputs({
-            ...inputs,
-            [event.target.name]: event.target.value,
-        });
-    }
-
-    const handleFileChange = (event) => {
-        console.log('handleFileChange', event.target.value);
-
-        const formData = new FormData();
-        formData.append('file', event.target.files[0]);
-    }
-
     const doUpload = async () => {
         try {
             const uploadResult = postFile(file, token);
@@ -41,8 +24,24 @@ const Upload = () => {
     const handleSubmit = (event) => {
         event.preventDefault();
         console.log('handleSubmit');
-
         doUpload();
+    }
+
+    const handleInputChange = (event) => {
+        console.log('handleInputChange', event.target.value);
+
+        setInputs({
+            ...inputs,
+            [event.target.name]: event.target.value,
+        });
+    }
+
+    const handleFileChange = (event) => {
+        console.log('handleFileChange', event.target.value);
+
+        const formData = new FormData();
+        formData.append('file', event.target.files[0]);
+        setFile(formData);
     }
 
     return (
