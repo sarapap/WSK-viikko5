@@ -1,11 +1,10 @@
-import { useState } from "react";
-import MediaRow from "../components/MediaRow";
-import { useMedia } from "../hooks/APIHooks";
+import MediaRow from '../components/MediaRow';
+import { useMedia } from '../hooks/APIHooks';
 
 const Home = () => {
-    const [selectedItem, setSelectedItem] = useState(null);
+    // const [selectedItem, setSelectedItem] = useState(null);
 
-    const { mediaArray } = useMedia().mediaArray;
+    const { mediaArray } = useMedia();
 
     return (
         <>
@@ -25,16 +24,15 @@ const Home = () => {
                 </thead>
                 <tbody>
                     {mediaArray.map((item) => (
-                        <MediaRow key={item.media_id}
+                        <MediaRow
+                            key={item.media_id}
                             item={item}
-                            setSelectedItem={setSelectedItem} />
+                        // setSelectedItem={setSelectedItem}
+                        />
                     ))}
                 </tbody>
             </table>
         </>
     );
-
 };
-
 export default Home;
-
