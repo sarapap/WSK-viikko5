@@ -1,6 +1,7 @@
 import { createContext, useContext, useState } from "react";
 import { useAuthentication } from "../hooks/APIHooks";
 import { useNavigate } from "react-router-dom";
+import { useUser } from "../hooks/APIHooks";
 
 const UserContext = createContext()
 
@@ -8,6 +9,7 @@ export const UserProvider = ({ children }) => {
     const [user, setUser] = useState()
     const { login } = useAuthentication();
     const navigate = useNavigate();
+    const { getUserByToken } = useUser();
 
     console.log("user in UserProvider", user)
 

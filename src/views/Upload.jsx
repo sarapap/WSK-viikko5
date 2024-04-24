@@ -1,72 +1,46 @@
+import { Link } from "react-router-dom";
 import { useState } from "react";
 
 const Upload = () => {
-    const [file, setFile] = useState(null);
-    const [inputs, setInputs] = useState();
 
-    const handleInputChange = (event) => {
-        console.log('handleInputChange', event.target.value);
-    }
-
-    const handleFileChange = (event) => {
-        console.log('handleFileChange', event.target.value);
-    }
+    const [file, setFile] = useState(" ");
+    const [name, setName] = useState(" ");
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        console.log('handleSubmit');
-    }
+        console.log('Tiedostoa lähetetään');
+
+        console.log("file", file);
+        console.log("name", name);
+    };
 
     return (
         <>
-            <h1>Upload</h1>
             <form onSubmit={handleSubmit}>
-                <div>
-                    <label htmlFor="title">Title</label>
-                    <input
-                        name="title"
-                        type="text"
-                        id="title"
-                        onChange={handleInputChange}
-                    />
-                </div>
-                <div>
-                    <label htmlFor="description">Description</label>
-                    <textarea
-                        name="description"
-                        rows={5}
-                        id="description"
-                        onChange={handleInputChange}
-                    ></textarea>
-                </div>
-                <div>
-                    <label htmlFor="file">File</label>
-                    <input
-                        name="file"
-                        type="file"
-                        id="file"
-                        accept="image/*, video/*"
-                        onChange={handleFileChange}
-                    />
-                </div>
-                <img
-                    src={
-                        file
-                            ? URL.createObjectURL(file)
-                            : 'https://via.placeholder.com/200?text=Choose+image'
-                    }
-                    alt="preview"
-                    width="200"
+                <input
+                    type="file"
+                    name="tiedosto"
+                    onChange={(event) =>
+                        setFile(event.target.value)}
+                /><br />
+                <label htmlFor="name">Name</label>
+                <input
+                    type="text"
+                    id="name"
+                    name="name"
+                    onChange={(event) =>
+                        setName(event.target.value)}
                 />
-                <button
-                    type="submit"
-                    disabled={file && inputs.title.length > 3 ? false : true}
-                >
-                    Upload
-                </button>
+                <button className='m-3 mt-0 p-3 rounded-lg text-stone-100'
+                    type="submit">
+                    Upload file</button>
             </form>
+
+            <p>
+                <Link to='/'>Back to Home</Link>
+            </p>
         </>
     );
-};
+}
 
 export default Upload;
