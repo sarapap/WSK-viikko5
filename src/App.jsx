@@ -7,14 +7,22 @@ import Layout from './views/Layout';
 import Single from './views/Single';
 import Login from './views/Login';
 import { UserProvider } from './contexts/UserContext';
+import HandleAutoLogin from './components/HandleAutoLogin';
+import ProtectedRoute from './components/ProtectedRoute';
 
 const App = () => {
   return (
     <Router>
       <UserProvider>
+        <HandleAutoLogin />
         <Routes>
           <Route path="/" element={<Layout />}>
             <Route index element={<Home />} />
+            <Route path="/profile" element={
+              <ProtectedRoute>
+                <Profile />
+              </ProtectedRoute>
+            } />
             <Route path="/profile" element={<Profile />} />
             <Route path="/upload" element={<Upload />} />
             <Route path="/media/:id" element={<Single />} />

@@ -1,7 +1,7 @@
 import { useUserContext } from "../contexts/UserContext";
 
 const UserData = () => {
-    const { user } = useUserContext()
+    const { user } = useUserContext();
 
     if (!user) {
         return null;
@@ -10,10 +10,10 @@ const UserData = () => {
     return (
         <>
             <p>Käyttäjätunnus: {user.username} </p>
-            <p>email: {user.email} </p>
-            <p>luotu: {new Date(user.created_at).toLocaleString('fi-FI')}</p>
+            <p>Email: {user.email} </p>
+            <p>Luotu: {new Date(user.created_at).toLocaleString('fi-FI')}</p>
         </>
     )
 }
 
-export default UserData
+export default UserData;
