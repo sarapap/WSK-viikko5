@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { postFile, useMedia } from "../hooks/APIHooks";
 
 const Upload = () => {
-    const [file, setFile] = useState(null);
+    const [file, setFile] = useState();
     const [inputs, setInputs] = useState({});
     const navigate = useNavigate();
     const token = localStorage.getItem('token');
@@ -28,17 +28,18 @@ const Upload = () => {
         doUpload();
     };
 
+    const handleFileChange = (event) => {
+        if (event.target.files) {
+            console.log(event.target.files[0]);
+            setFile(event.target.files[0]);
+        }
+    };
+
     const handleInputChange = (event) => {
         setInputs({
             ...inputs,
             [event.target.name]: event.target.value,
         });
-    };
-
-    const handleFileChange = (event) => {
-        const formData = new FormData();
-        formData.append('file', event.target.files[0]);
-        setFile(formData);
     };
 
     return (
@@ -61,7 +62,7 @@ const Upload = () => {
                         rows={5}
                         id="description"
                         onChange={handleInputChange}
-                    />
+                    ></textarea>
                 </div>
                 <div>
                     <label htmlFor="file">File</label>
@@ -73,14 +74,20 @@ const Upload = () => {
                         onChange={handleFileChange}
                     />
                 </div>
-                {file && (
-                    <img
-                        src={URL.createObjectURL(file.get('file'))}
-                        alt="preview"
-                        width="200"
-                    />
-                )}
-                <button type="submit">Upload</button>
+                <img
+                    src={
+                        file
+                            ? URL.createObjectURL(file)
+                            : "https://via.placeholder.com/200?text=Choose+image"
+                    }
+                    alt="preview"
+                    width="200"
+                />
+                <button
+                    type="submit"
+                    disabled={file && inputs.title.length > 3 ? false : true}>
+                    Upload
+                </button>
             </form>
         </>
     );

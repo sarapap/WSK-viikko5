@@ -9,4 +9,4 @@ Currently, two official plugins are available:
 
 # Linkki
 
-Open [Linkki tehtävään](https://users.metropolia.fi/~sarapap/forms/)
+Open [Linkki tehtävään](https://users.metropolia.fi/~sarapap/uploads/)

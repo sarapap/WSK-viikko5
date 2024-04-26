@@ -30,16 +30,16 @@ const useMedia = () => {
 
     const postMedia = async (file, inputs, token) => {
         const result = await fetchData(
-            import.meta.env.VITE_UPLOAD_SERVER + '/media',
+            import.meta.env.VITE_MEDIA_API + '/media',
             {
                 method: 'POST',
                 body: JSON.stringify({ ...file, ...inputs }),
                 headers: {
                     'Content-Type': 'application/json',
                     'Authorization': 'Bearer ' + token,
-                }
+                },
             }
-        )
+        );
         return result;
     };
 
@@ -103,24 +103,21 @@ const useAuthentication = () => {
 };
 
 const postFile = async (file, token) => {
-    console.log('postFile', file);
-    console.log('postFile', token);
     const formData = new FormData();
     formData.append('file', file);
 
+    const options = {
+        method: "POST",
+        body: formData,
+        headers: {
+            Authorization: "Bearer " + token,
+        },
+    };
     const result = await fetchData(
-        import.meta.env.VITE_MEDIA_API + '/upload',
-        {
-            method: 'POST',
-            body: formData,
-            headers:
-            {
-                "Authorization": "Bearer " + token,
-            }
-        }
+        import.meta.env.VITE_UPLOAD_SERVER + "/upload",
+        options,
     );
-    console.log('postFile', result);
-    return result;
+    return result.data;
 };
 
 
