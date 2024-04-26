@@ -79,28 +79,6 @@ td a {
   padding: 0.5rem;
 }
 
-/* media item dialog */
-/* dialog {
-  position: fixed;
-  top: 5%;
-  height: 80vh;
-  background: rgba(0, 0, 0, 0.8);
-  z-index: 9999;
-  color: rgba(255, 255, 255, 0.87);
-} */
-
-/* dialog img,
-video {
-  height: 50%;
-  object-fit: contain;
-} */
-
-/* single view */
-/* img,
-video {
-  max-width: 100%;
-} */
-
 /* Form */
 form {
   display: flex;
@@ -137,12 +115,6 @@ form textarea {
   border-radius: 5px;
 }
 
-/* button {
-  margin: 10px 0;
-  padding: 10px;
-  border-radius: 5px;
-  background-color: #363636;
-  color: white;
-  border: none;
-  cursor: pointer;
-} */
+nav {
+  display: flex;
+}

@@ -27,8 +27,25 @@ const useMedia = () => {
         getMedia();
     }, []);
 
-    return { mediaArray };
+
+    const postMedia = async (file, inputs, token) => {
+        const result = await fetchData(
+            import.meta.env.VITE_MEDIA_API + '/media',
+            {
+                method: 'POST',
+                body: JSON.stringify({ ...file, ...inputs }),
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': 'Bearer ' + token,
+                },
+            }
+        );
+        return result;
+    };
+
+    return { mediaArray, postMedia };
 };
+
 
 const useUser = () => {
     const getUserById = async (id) => {
@@ -82,8 +99,26 @@ const useAuthentication = () => {
         );
         return loginResult;
     };
-
     return { login };
 };
 
-export { useMedia, useUser, useAuthentication };
+const postFile = async (file, token) => {
+    const formData = new FormData();
+    formData.append('file', file);
+
+    const options = {
+        method: "POST",
+        body: formData,
+        headers: {
+            Authorization: "Bearer " + token,
+        },
+    };
+    const result = await fetchData(
+        import.meta.env.VITE_UPLOAD_SERVER + "/upload",
+        options,
+    );
+    return result.data;
+};
+
+
+export { useMedia, useUser, useAuthentication, postFile };
